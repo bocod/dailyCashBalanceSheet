@@ -40,12 +40,20 @@ function MainContent() {
         let currentConcept = newConcept.current.value;
         if (e.key !== 'Enter') return
         if ( e.key === 'Enter' ) {
+
+            const amountError = document.querySelector('#amountError');
+            if ( currentConcept === '' ){
+                const fakeEnter = {key: 'Enter'}
+                return handleConcept(fakeEnter);
+            }
             if ( currentAmount === '' || currentAmount === 0 ) {
-                const amountError = document.querySelector('#amountError');
+
                 let errorMsg = 'You must complete amount';
                 return amountError.innerText = errorMsg;
+
             } else if ( currentAmount !== '' ) {
 
+                amountError.innerText = '';
                 setMovement( previousMovements => {
                     return [...previousMovements, {id: uuid(), operation: (currentAmount>0) ? 'income' : 'outcome', amount: currentAmount, concept: currentConcept}]
                 })
@@ -62,15 +70,22 @@ function MainContent() {
     );
 
     const handleConcept = (e) => {
-        if (e.key === 'Enter' && newMovement.current.value === '') {
+        if ((e.key === 'Enter' && newMovement.current.value !== '') || (e.key === 'Enter' && newMovement.current.value === '')) {
+
+            const conceptError = document.querySelector('#conceptError');
 
             if (newConcept.current.value === '') {
                 
-                const conceptError = document.querySelector('#conceptError');
                 let errorMsg = 'You must complete concept!';
                 return conceptError.innerText = errorMsg;
+            
             } else {
-                return newMovement.current.focus();
+
+                conceptError.innerText = ''
+            
+                return (
+                    newMovement.current.focus()
+                );
             }
 
         }
@@ -79,7 +94,7 @@ function MainContent() {
         const innerValues =  () => {
             if ( movement.amount > 0 ) {
                 return (
-                    <tr>
+                    <tr key={movement.id}>
                         <td>{movement.concept}</td>
                         <td>{movement.amount}</td>
                         <td></td>
@@ -108,9 +123,9 @@ function MainContent() {
                 <h2>You balance is: {balance}</h2>
                 <article className="dataEntry">
 
-                    <span id="conceptError"></span>
+                    <span id="conceptError" className="inputError"></span>
                     <input  autoFocus type='text' ref={newConcept} placeholder='Operation Concept' onKeyDown={handleConcept}></input>
-                    <span id="amountError"></span>
+                    <span id="amountError" className="inputError"></span>
                     <input type='number' ref={newMovement} placeholder='Operation Amount' onKeyDown={handleAmount}></input>
                     
                     <sup>Insert data and press 'return' button ⏎</sup>

@@ -10,6 +10,11 @@ input {
     margin: 1rem 0;
 }
 
+.inputError {
+    font-size: small;
+    color: tomato;
+}
+
 .dataEntry sup {
     font-size: small;
 }
