@@ -1,0 +1,35 @@
+.dataEntry {
+    display: flex;
+    flex-direction : column;
+    margin-bottom: 1rem;
+}
+
+input {
+    max-width: 500px;
+    padding: 0.5rem;
+    margin: 1rem 0;
+}
+
+.dataEntry sup {
+    font-size: small;
+}
+
+.sheetStyle {
+    display:flex;
+    justify-content: flex-start;
+    max-width: 500px;
+}
+
+.sheetStyle table {
+    width: 100%;
+    text-align: left;
+}
+
+table thead th .tableConcept {
+    width: 50%;
+}
+
+table thead th .tableAmount {
+    width: 25%;
+}
+

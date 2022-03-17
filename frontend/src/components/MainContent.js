@@ -1,30 +1,38 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { v4 as uuid } from 'uuid';
+import '../css/MainContent.css';
 
-
+const KEY = 'bocod.AccountApp';
 
 function MainContent() {
 
-    const sheetStyle = {
-        display:'flex',
-        justifyContent: 'flexStart',
-        width: '500px'
-    }
-    const dataEntry = {
-        display: 'flex',
-        flexDirection: 'column'
-    }
+
 
     let newMovement = useRef();
     let newConcept  = useRef();
 
-    const [ movements, setMovement ] = useState([
-        // {
-        //     id:1, 
-        //     operation: 'income',
-        //     amount: 1000
-        // }
-    ]);
+    const [ movements, setMovement ] = useState([]);
+
+    //Search if it is any previous data stored in localStorage 
+    useEffect( () => {
+            const storeMovements = JSON.parse(localStorage.getItem(KEY))
+            if (storeMovements) {
+                setMovement(storeMovements);
+            }
+        }, []
+    )
+
+    //Store data in localStorage
+    useEffect( () => {
+            localStorage.setItem(KEY, JSON.stringify(movements))
+        }, [movements]
+    )
+
+    let errorValidation = (msg) => {
+        return (
+            <p>{msg}</p>
+        )
+    };
 
     // When an amount is entered, first check if the key is 'Enter', then check if the value is not empty, !empty the state is updated
     const handleAmount = (e) => {
@@ -32,8 +40,10 @@ function MainContent() {
         let currentConcept = newConcept.current.value;
         if (e.key !== 'Enter') return
         if ( e.key === 'Enter' ) {
-            if ( currentAmount === '' ) {
-                return
+            if ( currentAmount === '' || currentAmount === 0 ) {
+                const amountError = document.querySelector('#amountError');
+                let errorMsg = 'You must complete amount';
+                return amountError.innerText = errorMsg;
             } else if ( currentAmount !== '' ) {
 
                 setMovement( previousMovements => {
@@ -42,6 +52,8 @@ function MainContent() {
                 
             }
             newMovement.current.value = null;
+            newConcept.current.value = null;
+            newConcept.current.focus();
         }
     }
 
@@ -49,16 +61,18 @@ function MainContent() {
         (previousValue, currentValue) => previousValue + currentValue.amount, 0
     );
 
-    let debitsList = movements.filter(item => item.amount > 0);
-    let creditsList = movements.filter(item => item.amount < 0);
-    
-    const handleConcept = () => {
-        
-        if (newConcept.current.value === '') {
-            
-            const conceptField = document.querySelector('validation');
+    const handleConcept = (e) => {
+        if (e.key === 'Enter' && newMovement.current.value === '') {
 
-            conceptField.style.display = 'block';
+            if (newConcept.current.value === '') {
+                
+                const conceptError = document.querySelector('#conceptError');
+                let errorMsg = 'You must complete concept!';
+                return conceptError.innerText = errorMsg;
+            } else {
+                return newMovement.current.focus();
+            }
+
         }
     }
     const tableRows = movements.map ( movement => {
@@ -92,20 +106,22 @@ function MainContent() {
         <React.Fragment>
             <section>
                 <h2>You balance is: {balance}</h2>
-                <article style={dataEntry}>
-                    <input type='text' ref={newConcept} placeholder='Operation Concept' onBlur={handleConcept}></input>
-                    <p className='validation' style={{display:'none'}}>Debes ingresar un concepto</p>
+                <article className="dataEntry">
+
+                    <span id="conceptError"></span>
+                    <input  autoFocus type='text' ref={newConcept} placeholder='Operation Concept' onKeyDown={handleConcept}></input>
+                    <span id="amountError"></span>
                     <input type='number' ref={newMovement} placeholder='Operation Amount' onKeyDown={handleAmount}></input>
                     
-                    <sup>Insert amount and press Return button ⏎</sup>
+                    <sup>Insert data and press 'return' button ⏎</sup>
                 </article>
-                <article style={sheetStyle}>
-                    <table style={{width:'100%'}}>
+                <article className="sheetStyle">
+                    <table>
                         <thead>
                             <tr>
-                                <th style={{width:'50%'}}>Concept</th>
-                                <th style={{width:'25%'}}>Debits</th>
-                                <th style={{width:'25%'}}>Credits</th>
+                                <th className="tableConcept">Concept</th>
+                                <th className="tableAmount">Debits</th>
+                                <th className="tableAmount">Credits</th>
                             </tr>
                         </thead>
                         <tbody>
