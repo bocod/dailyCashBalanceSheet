@@ -43,6 +43,10 @@ function MainContent() {
 
             const amountError = document.querySelector('#amountError');
             if ( currentConcept === '' ){
+                if (currentAmount !== '') {
+                    amountError.innerText = '';
+                    newConcept.current.focus();
+                }
                 const fakeEnter = {key: 'Enter'}
                 return handleConcept(fakeEnter);
             }
@@ -68,6 +72,14 @@ function MainContent() {
     let balance = movements.reduce(
         (previousValue, currentValue) => previousValue + currentValue.amount, 0
     );
+
+    if (balance < 0){
+        document.getElementById('balance').style.color = 'tomato';
+    } else if (balance > 0){
+        document.getElementById('balance').style.color = 'yellowgreen';
+    } else if (balance === 0) {
+        document.getElementById('balance').style.color = 'white';
+    }
 
     const handleConcept = (e) => {
         if ((e.key === 'Enter' && newMovement.current.value !== '') || (e.key === 'Enter' && newMovement.current.value === '')) {
@@ -120,7 +132,7 @@ function MainContent() {
     return (
         <React.Fragment>
             <section>
-                <h2>You balance is: {balance}</h2>
+                <h2 id="balance">You balance is: {balance}</h2>
                 <article className="dataEntry">
 
                     <span id="conceptError" className="inputError"></span>
