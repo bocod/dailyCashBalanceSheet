@@ -10,9 +10,9 @@ function App() {
 
         {/* <Navbar /> */}
         <MainContent />
-        <Footer />
 
       </header>
+        <Footer />
     </div>
   );
 }

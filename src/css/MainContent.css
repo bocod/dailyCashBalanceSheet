@@ -19,6 +19,10 @@ input {
     font-size: small;
 }
 
+#amountInput:focus + #amountAdvice{
+    color: tomato;
+}
+
 .sheetStyle {
     display:flex;
     justify-content: flex-start;
