@@ -164,7 +164,7 @@ function MainContent() {
             } 
         }
         return (
-            <React.Fragment>
+            <React.Fragment key={movement.id}>
                 {innerValues()}
             </React.Fragment>            
         )
