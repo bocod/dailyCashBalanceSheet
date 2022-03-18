@@ -22,12 +22,14 @@ input {
 .sheetStyle {
     display:flex;
     justify-content: flex-start;
+    width: 90vw;
     max-width: 500px;
 }
 
 .sheetStyle table {
     width: 100%;
     text-align: left;
+    flex-grow: 2;
 }
 
 table thead th .tableConcept {

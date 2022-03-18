@@ -72,14 +72,18 @@ function MainContent() {
     let balance = movements.reduce(
         (previousValue, currentValue) => previousValue + currentValue.amount, 0
     );
-
-    if (balance < 0){
-        document.getElementById('balance').style.color = 'tomato';
-    } else if (balance > 0){
-        document.getElementById('balance').style.color = 'yellowgreen';
-    } else if (balance === 0) {
-        document.getElementById('balance').style.color = 'white';
+    try {
+        if (balance < 0){
+            document.getElementById('balance').style.color = 'tomato';
+        } else if (balance > 0){
+            document.getElementById('balance').style.color = 'yellowgreen';
+        } else if (balance === 0 || balance === null) {
+            document.getElementById('balance').style.color = 'white';
+        }
+    } catch (error) {
+        console.log(error);
     }
+
 
     const handleConcept = (e) => {
         if ((e.key === 'Enter' && newMovement.current.value !== '') || (e.key === 'Enter' && newMovement.current.value === '')) {
@@ -102,6 +106,17 @@ function MainContent() {
 
         }
     }
+
+    const handleDeleteMovement = (id) => {
+        
+        if(window.confirm('Are you sure you want to delete movement?') === true) {
+            setMovement(  previousMovements => {
+                return previousMovements.filter( item => item.id !== id)
+            })
+        } 
+    
+    };
+
     const tableRows = movements.map ( movement => {
         const innerValues =  () => {
             if ( movement.amount > 0 ) {
@@ -110,6 +125,7 @@ function MainContent() {
                         <td>{movement.concept}</td>
                         <td>{movement.amount}</td>
                         <td></td>
+                        <td><button onClick={() => handleDeleteMovement(movement.id)}>🗑</button></td>
                     </tr>
                 )
             } else {
@@ -118,6 +134,7 @@ function MainContent() {
                         <td>{movement.concept}</td>
                         <td></td>
                         <td>{movement.amount}</td>
+                        <td><button onClick={() => handleDeleteMovement(movement.id)}>🗑</button></td>
                     </tr>
                 )
             } 
@@ -149,26 +166,13 @@ function MainContent() {
                                 <th className="tableConcept">Concept</th>
                                 <th className="tableAmount">Debits</th>
                                 <th className="tableAmount">Credits</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             {tableRows}
                         </tbody>
                     </table>
-
-
-                    {/* <div style={{width:'50%'}}>
-                        <h3>Debits</h3>
-                        {debitsList.map(item => {
-                            return <li key={item.id}>{item.amount}</li>
-                        })}
-                    </div>
-                    <div style={{width:'50%'}}>
-                        <h3>Credits</h3>
-                        {creditsList.map(item => {
-                            return <li key={item.id}>{item.amount}</li>
-                        })}
-                    </div> */}
                 </article>
             </section>
         </React.Fragment>
