@@ -9,8 +9,8 @@ function App() {
       <header className="App-header">
 
         {/* <Navbar /> */}
+        <h1>Your personal budget <br></br> ...on the go</h1>
         <MainContent />
-
       </header>
         <Footer />
     </div>
