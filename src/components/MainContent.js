@@ -87,7 +87,6 @@ function MainContent() {
             }
             newMovement.current.value = null;
             newConcept.current.value = null;
-            newDate.current.focus();
             newDate.current.value = null;
         }
     }
