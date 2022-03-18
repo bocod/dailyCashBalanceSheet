@@ -40,3 +40,10 @@ table thead th .tableAmount {
     width: 25%;
 }
 
+table tbody button {
+    background-color: transparent;
+    padding: none;
+    margin: none;
+    border: none;
+    font-size: 1.15rem;
+}

@@ -28,12 +28,6 @@ function MainContent() {
         }, [movements]
     )
 
-    let errorValidation = (msg) => {
-        return (
-            <p>{msg}</p>
-        )
-    };
-
     // When an amount is entered, first check if the key is 'Enter', then check if the value is not empty, !empty the state is updated
     const handleAmount = (e) => {
         let currentAmount = Number(newMovement.current.value);
@@ -153,9 +147,9 @@ function MainContent() {
                 <article className="dataEntry">
 
                     <span id="conceptError" className="inputError"></span>
-                    <input  autoFocus type='text' ref={newConcept} placeholder='Operation Concept' onKeyDown={handleConcept}></input>
+                    <input  autoFocus type='text' ref={newConcept} placeholder='Operation Concept' onKeyDown={handleConcept} required></input>
                     <span id="amountError" className="inputError"></span>
-                    <input type='number' ref={newMovement} placeholder='Operation Amount' onKeyDown={handleAmount}></input>
+                    <input type='number' ref={newMovement} placeholder='Operation Amount' onKeyDown={handleAmount} required></input>
                     
                     <sup>Insert data and press 'return' button ⏎</sup>
                 </article>

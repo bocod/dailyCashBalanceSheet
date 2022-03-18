@@ -1,67 +1,21 @@
-# CHALLENGE FULL STACK - JavaScript 🚀
+# Daily Cash Movements - Balance Sheet App
 
-## Objetivo
+Open [Link to web app]()
 
-Desarrollar una aplicación para administración de presupuesto personal. La misma debe
-permitir crear y editar ingresos y egresos de dinero, y mostrar un balance resultante de las
-operaciones registradas.
+## Instructions
 
-## Requerimientos Técnicos
+The title shows your balance result. According to the situation the color of the title changes from white to red (if you ran out of money) or green (if you have superavit).
 
-Deberás desarrollar una API en Node.js junto a cualquiera de los siguientes frameworks,
-en sus versiones estables:
+In the first input your must complet a 'Concept' or 'Description' for the movement you want to register.
 
-● Express
-● Adonis
-● Koa
+In the second input your must complet an 'Amount' for the movement you want to register. It only accepts numbers.
+If you want to register an INCOME you can complete the input field with the number representing that amount.
+If you want to register an OUTCOME you can complete the input field with the '-' symbol followed of the number representing that amount.
 
-En el caso de querer utilizar otro framework es posible, pero debe consultarse con
-anterioridad.
+Every input is mandatory, it is required to complete them in order to continue.
 
-Los datos mostrados deben ser persistidos en una base de datos relacional. El esquema de
-datos puede armarse según se considere apropiado en base a los requerimientos del
-negocio. La API deberá exponer URLS que devuelvan datos en JSON.
-Estos datos en JSON deberán ser consumidos por un cliente, a través de peticiones AJAX.
-El cliente puede ser armado con React.js.
-El trabajo realizado se subirá a un repositorio.
+Once you enter a concept in the concept field, and an amount in the amount field, press enter and the movement will be registered, show in the table at the bottom of the page, and stored to persist data.
 
-## Secciones
+If you want to delete a movement you can just click on the trash can icon and confirm the action. If you regret, once you clicked the icon, you can cancel the action, but once you confirm the delete action there is no turnback.
 
-### Home
-La pantalla de inicio deberá mostrar el balance actual, es decir, el resultante de los
-ingresos y egresos de dinero cargados, y un listado de los últimos 10 registrados.
-
-### ABM de operaciones (ingresos y egresos)
-La aplicación deberá contener:
-    ● Formulario de registro de operación. El mismo deberá contener:
-        ○ Concepto
-        ○ Monto
-        ○ Fecha
-        ○ Tipo (ingreso o egreso)
-    ● Listado de operaciones registradas según su tipo (ingreso o egreso).
-    ● Desde el listado, se debe poder modificar o eliminar una operación registrada
-    previamente. No debe ser posible modificar el tipo de operación (ingreso o
-    egreso) una vez creada.
-
-## Bonus
-De forma adicional, puede:
-
-### Autenticación de usuarios
-Agregar un formulario de registro y login para permitir identificar al usuario que utiliza la
-aplicación, y vincular las operaciones registradas al usuario autenticado en el sistema,
-tanto para el listado y creación de nuevos registros. Los datos indispensables para permitir
-el ingreso deben ser un email y contraseña, pudiendo agregar los que se deseen.
-
-### Categorías de operaciones
-Agregar la funcionalidad de categorizar las operaciones registradas en el gestor, como por
-ejemplo, una categoría “comida” para categorizar egresos. Adicionalmente, agregar la
-posibilidad de listar operaciones por categoría.
-
-## Criterios a Evaluar
-● El diseño debe ser responsive, pudiendo utilizarse CSS puro o algún framework
-de Frontend
-● Código limpio, buenas prácticas de programación, en idioma inglés
-
-● Correcto diseño de la base de datos
-● Buenas prácticas de GIT: Commits declarativos y atomizados
-● Buenas prácticas para el nombre de rutas
+I hope you enjoy this app!
