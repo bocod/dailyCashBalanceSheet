@@ -35,13 +35,23 @@ input {
     text-align: left;
     flex-grow: 2;
 }
+table thead {
+    font-size: 20px;
+}
 
+table thead th .tableDate {
+    width: 10%;
+}
 table thead th .tableConcept {
-    width: 50%;
+    width: 40%;
 }
 
 table thead th .tableAmount {
-    width: 25%;
+    width: 20%;
+}
+
+table tbody {
+    font-size: 16px;
 }
 
 table tbody button {

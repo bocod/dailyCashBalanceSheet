@@ -87,8 +87,8 @@ function MainContent() {
             }
             newMovement.current.value = null;
             newConcept.current.value = null;
-            newDate.current.value = null;
             newDate.current.focus();
+            newDate.current.value = null;
         }
     }
 
@@ -192,7 +192,7 @@ function MainContent() {
                     <table>
                         <thead>
                             <tr>
-                                <th className="tableConcept">Date</th>
+                                <th className="tableDate">Date</th>
                                 <th className="tableConcept">Concept</th>
                                 <th className="tableAmount">Debits</th>
                                 <th className="tableAmount">Credits</th>
